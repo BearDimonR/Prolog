@@ -1,0 +1,25 @@
+{
+  "name": "urulu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.4.1",
+    "express": "^4.17.1",
+    "js-snackbar": "^1.1.2",
+    "nan": "^2.14.2",
+    "tau-prolog": "^0.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.13.12"
+  }
+}

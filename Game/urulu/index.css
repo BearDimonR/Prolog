@@ -1,0 +1,75 @@
+
+
+.main-div{
+    border-radius: 10px;
+    box-shadow: 0 0 7px 3px #2ba7a4;
+    padding: 10px 20px 10px 20px;
+    margin: 20px;
+    background: lavenderblush;
+}
+.boards-div{
+    display: flex;
+}
+.board-div{
+    flex: 70%;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 7px 3px #033961;
+    margin: 20px;
+    background: #033961;
+}
+
+.game-div{
+    flex: 30%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 7px 3px #df903c;
+    margin: 20px;
+    background: #df903c;
+}
+
+.div-cards{
+    position: fixed;
+    display: flex;
+    top: 34.2%;
+    left: 3.7%;
+}
+
+.card{
+    flex: 13%;
+    margin: 2px 0px 0px 20px;
+    width: 99px;
+}
+
+.div-buttons{
+    display: flex;
+    padding: 40px;
+}
+
+.div-circles{
+    position: fixed;
+}
+
+.circle-select {
+    position: fixed;
+    width: 65px;
+    height: 65px;
+    -webkit-border-radius: 37px;
+    -moz-border-radius: 37px;
+    border-radius: 37px;
+    background: #96a0a5;
+}
+
+.rectangle-color {
+    position: fixed;
+    margin: 8px;
+    width:25px;
+    height:25px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background: white;
+    border: black 2px solid;
+    opacity: 0%;
+
+}

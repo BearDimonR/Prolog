@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="js-snackbar.css">
+    <title>Urulu!</title>
+</head>
+<body>
+<div class="main-div">
+    <div class="boards-div">
+        <div class="board-div">
+            <img src="resources\realboard.png" style="width: 100%">
+            <div class="div-cards">
+                <div class="card">
+                    <img id="card_1" src="resources\next.png" style="width: 100%">
+                    <div id="color_1" class="rectangle-color"></div>
+                </div>
+                <div class="card">
+                    <img id="card_2" src="resources\next.png" style="width: 100%">
+                    <div id="color_2" class="rectangle-color"></div>
+                </div>
+                <div class="card">
+                    <img id="card_3" src="resources\next.png" style="width: 100%">
+                    <div id="color_3" class="rectangle-color"></div>
+                </div>
+                <div class="card">
+                    <img id="card_4" src="resources\next.png" style="width: 100%">
+                    <div id="color_4" class="rectangle-color"></div>
+                </div>
+                <div class="card">
+                    <img id="card_5" src="resources\next.png" style="width: 100%">
+                    <div id="color_5" class="rectangle-color"></div>
+                </div>
+                <div class="card">
+                    <img id="card_6" src="resources\next.png" style="width: 100%">
+                    <div id="color_6" class="rectangle-color"></div>
+                </div>
+                <div class="card">
+                    <img id="card_7" src="resources\next.png" style="width: 100%">
+                    <div id="color_7" class="rectangle-color"></div>
+                </div>
+                <div class="card">
+                    <img id="card_8" src="resources\next.png" style="width: 100%">
+                    <div id="color_8" class="rectangle-color"></div>
+                </div>
+            </div>
+            <div class="div-buttons">
+                <button type="button" id="random" onclick="getRandom(this)" class="btn btn-sm btn-primary">Генерувати
+                    раунд
+                </button>
+                <button type="button" id="check" onclick="check(this)" class="btn btn-sm btn-info"
+                        style="margin-left: 30%">Перевірити
+                </button>
+                <button type="button" id="solution" onclick="getSolution(this)" class="btn btn-sm btn-success"
+                        style="margin-left: 30%">Отримати розв'язок
+                </button>
+            </div>
+        </div>
+        <div class="game-div">
+            <img src="resources\player_board.png" style="width: 100%">
+            <div class="div-circles">
+                <button id="circle_1" onclick="circleClick(this)" type="button" class="circle-select"
+                        style=" top: 61.5%; left:80.5%"><b>1</b></button>
+                <button id="circle_3" onclick="circleClick(this)" type="button" class="circle-select"
+                        style=" top: 30.2%; left:71%"><b>3</b></button>
+                <button id="circle_2" onclick="circleClick(this)" type="button" class="circle-select"
+                        style=" top: 42.2%; left:71%"><b>2</b></button>
+                <button id="circle_4" onclick="circleClick(this)" type="button" class="circle-select"
+                        style=" top: 9.2%; left:77.5%"><b>4</b></button>
+                <button id="circle_5" onclick="circleClick(this)" type="button" class="circle-select"
+                        style=" top: 9.2%; left:83.4%"><b>5</b></button>
+                <button id="circle_6" onclick="circleClick(this)" type="button" class="circle-select"
+                        style=" top: 22.6%; left:90.2%"><b>6</b></button>
+                <button id="circle_7" onclick="circleClick(this)" type="button" class="circle-select"
+                        style=" top: 34.6%; left:90.2%"><b>7</b></button>
+                <button id="circle_8" onclick="circleClick(this)" type="button" class="circle-select"
+                        style=" top: 46.8%; left:90.2%"><b>8</b></button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js-snackbar.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script>
+    function getRandom(btn) {
+        btn.style.disabled = true;
+        for (let i = 0; i < 8; i++) {
+            let elem = $('#circle_' + (i + 1))[0]
+            elem.style.background = "grey"
+            elem.style.color = "black"
+        }
+
+        $.ajax({
+            url: "/random",
+            type: "GET",
+            contentType: "application/json",
+            success: function (solution) {
+                btn.style.disabled = false;
+                let elem, color
+                for (let i = 0; i < solution.length; i++) {
+                    $('#card_' + (i + 1)).attr('src', 'resources\\' + solution[i].img);
+                    color = solution[i].color
+                    elem = $('#color_' + (i + 1))
+                    if (color == undefined) {
+                        elem[0].style.opacity = '0%'
+                    } else {
+                        elem[0].style.opacity = '100%';
+                        elem[0].style.background = color
+                    }
+                }
+            }
+        });
+    }
+
+    const all_colors = ["white", "pink", "yellow", "orange", "red", "green", "blue", "black", "grey"]
+
+    function getSolution(btn) {
+        btn.style.disabled = true;
+
+        $.ajax({
+            url: "/solution",
+            type: "GET",
+            contentType: "application/json",
+            success: function (colors) {
+                btn.style.disabled = false;
+                let points = colors[0]
+                let my_points = 0
+                let color = ""
+                let el
+                colors.shift()
+                let difference = colors.filter(x => !all_colors.includes(x))
+                    .concat(all_colors.filter(x => !colors.includes(x)));
+                for (let i = 0; i < colors.length; i++) {
+                    color = colors[i]
+                    el = $('#circle_' + (i + 1))[0]
+                    if (color == "green" || color == "blue" || color == "black") {
+                        el.style.color = "white"
+                    } else {
+                        el.style.color = "black"
+                    }
+                    let back = el.style.background
+                    if (back == colors[i] && back != "grey")
+                        my_points++
+                    else if (colors[i] == "grey") {
+                        if (difference.includes(back)) {
+                            my_points++
+                            colors[i] = back
+                            const index = difference.indexOf(back);
+                            if (index > -1) {
+                                difference.splice(index, 1);
+                            }
+                        }
+                    }
+                    el.style.background = colors[i]
+                }
+
+                for (let i = 0; i < colors.length; i++) {
+                    color = colors[i]
+                    if (color != "grey") continue
+                    console.log(i)
+                    console.log(difference)
+                    color = difference.shift()
+                    el = $('#circle_' + (i + 1))[0]
+                    el.style.background = color
+                    if (color == "green" || color == "blue" || color == "black") {
+                        el.style.color = "white"
+                    } else {
+                        el.style.color = "black"
+                    }
+                }
+                new SnackBar({
+                    message: `Максимальна к-сть очок: ${points}`,
+                    timeout: 3000,
+                    status: "success",
+                    position: "bc"
+                })
+            }
+        });
+    }
+
+
+    function circleClick(elem) {
+        console.log(elem.style)
+        let background = elem.style.background;
+        console.log(background)
+        switch (background) {
+            case "white":
+                background = "pink";
+                break
+            case "pink":
+                background = "yellow";
+                break
+            case "yellow":
+                background = "orange";
+                break
+            case "orange":
+                background = "red";
+                break
+            case "red":
+                background = "green";
+                elem.style.color = "white";
+                break
+            case "green":
+                background = "blue";
+                break
+            case "blue":
+                background = "black";
+                break
+            case "black":
+                background = "white";
+                elem.style.color = "black";
+                break;
+            default:
+                background = "white";
+                break;
+        }
+        elem.style.background = background
+    }
+
+    function check(btn) {
+        btn.style.disabled = true;
+        let colors = []
+        for (let i = 0; i < 8; i++)
+            colors.push($('#circle_' + (i + 1))[0].style.background)
+        $.ajax({
+            url: "/check",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({info: colors}),
+            success: function (n) {
+                btn.style.disabled = false;
+                new SnackBar({
+                    message: n,
+                    timeout: 3000,
+                    status: "information",
+                    position: "bc"
+                })
+            }
+        })
+    }
+
+</script>
+
+
+</body>
+</html>
